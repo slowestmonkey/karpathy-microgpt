@@ -37,8 +37,8 @@ vocab_size = len(uchars) + 1 # total number of unique tokens, +1 is for BOS
 print(f"vocab size: {vocab_size}")
 
 # Initialize the parameters
-n_embd = 2     # embedding dimension
-matrix = lambda nout, nin: [[random.gauss(0, 1 / vocab_size) for _ in range(nin)] for _ in range(nout)]
+n_embd = 16     # embedding dimension
+matrix = lambda nout, nin: [[random.gauss(0, 1/ vocab_size) for _ in range(nin)] for _ in range(nout)]
 state_dict = {
     'wte': matrix(vocab_size, n_embd),
     'mlp_fc1': matrix(4 * n_embd, n_embd),
@@ -123,6 +123,7 @@ def analytic_gradient(tokens, n):
 
         # d(loss)/d(h_pre): relu backward
         dh_pre = [dh[j] * (1.0 if h_pre[j] > 0 else 0.0) for j in range(len(h_pre))]
+        
         # d(loss)/d(mlp_fc1), d(loss)/d(x): h_pre = mlp_fc1 @ x
         dx = [0.0] * len(x)
         for i in range(len(dh_pre)):
