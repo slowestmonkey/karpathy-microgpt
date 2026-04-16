@@ -137,8 +137,7 @@ for step in range(num_steps):
         p.data -= lr_t * p.grad
         p.grad = 0
 
-    if step < 5 or step % 200 == 0:
-        print(f"step {step+1:4d} / {num_steps:4d} | loss {loss.data:.4f}")
+    print(f"step {step+1:4d} / {num_steps:4d} | loss {loss.data:.4f}")
 
 # Inference: sample new names from the model
 temperature = 0.5

@@ -38,6 +38,9 @@ class Value:
     def __pow__(self, other):
         return Value(self.data**other, (self,), (other * (self.data ** (other - 1)),))
 
+    def __rmul__(self, other):
+        return self * other
+
     def __sub__(self, other):
         return self + (-other)
 
@@ -142,10 +145,7 @@ for step in range(steps):
     for p in params:
         p.data -= lr * p.grad
         p.grad = 0.0
-        # p.local_grads = ()
-        # p.children = ()
 
-        # if step < 5 or step % 200 == 0:  # print a bit less often
     print(f"step {step+1:4d} / {steps:4d} | loss {loss.data:.4f} | lr {lr:.4f}")
 
 temperature = 0.5
