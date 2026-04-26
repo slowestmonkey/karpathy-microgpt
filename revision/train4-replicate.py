@@ -196,6 +196,14 @@ def gpt(token_id, pos_id, keys, values):
 
     return logits
 
+# --- debug: trace softmax of a length-1 list ---
+x = Value(2.5)              # any value works; result is always 1.0
+out = softmax([x])           # out is a list with one Value
+result = out[0]
+print(f"forward: result.data = {result.data}")  # expect 1.0
+result.backward()
+print(f"backward: x.grad = {x.grad}")            # expect 0.0
+
 
 default_lr = 0.1
 steps = 1000
