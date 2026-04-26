@@ -207,15 +207,13 @@ print(f"backward: x.grad = {x.grad}")            # expect 0.0
 
 default_lr = 0.1
 steps = 1000
-keys = [[] for _ in range(n_layer)]
-values = [[] for _ in range(n_layer)]
 for s in range(steps):
     doc = docs[s % len(docs)]
     tokens = [BOS] + [uchars.index(t) for t in doc] + [BOS]
     n = min(block_size, len(tokens) - 1)
 
-    # keys = [[] for _ in range(n_layer)]
-    # values = [[] for _ in range(n_layer)]
+    keys = [[] for _ in range(n_layer)]
+    values = [[] for _ in range(n_layer)]
     losses = []
     for i in range(n):
         token_id, target_id = tokens[i], tokens[i + 1]
