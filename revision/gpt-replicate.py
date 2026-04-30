@@ -152,9 +152,9 @@ def gpt(token_id, pos_id, keys, values):
             attn_weights = softmax(k_h)
 
             payload = [0 for _ in range(head_dim)]
-            for i, val in enumerate(values[l]):
-                v_weighted = [attn_weights[i] * vj for vj in val[hs:he]]
-                payload = [pi + wj for pi, wj in zip(payload, v_weighted)]
+            for i, value in enumerate(values[l]):
+                v_weighted = [attn_weights[i] * vi for vi in value[hs:he]]
+                payload = [pi + vwi for pi, vwi in zip(payload, v_weighted)]
             attn_logits.extend(payload)
 
         attn_output = linear(attn_logits, state_dict[f"attn_wo_{l}"])
