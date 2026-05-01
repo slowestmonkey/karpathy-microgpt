@@ -118,7 +118,7 @@ def linear(x, m):
 
 def softmax(logits):
     l_max = max([l.data for l in logits])
-    exp = [(l - l_max).exp() for l in logits]  # Why we need this then?
+    exp = [(l - l_max).exp() for l in logits]
     total = sum(exp)
     return [l / total for l in exp]
 
