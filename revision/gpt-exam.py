@@ -121,6 +121,8 @@ def gpt(token_id, pos_id, keys, values):
     t_embd = state_dict["wte"][token_id]
     p_embd = state_dict["wpe"][pos_id]
     x = [ti + pi for ti, pi in zip(t_embd, p_embd)]
+    # why is it needed?
+    x = rmsnorm(x)
 
     for l in range(n_layer):
         # attention
